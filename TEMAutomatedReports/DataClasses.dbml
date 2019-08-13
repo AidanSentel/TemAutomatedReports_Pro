@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="PRO" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=192.168.10.9;Initial Catalog=PRO;User ID=sa" SettingsObjectName="TEMAutomatedReports.Properties.Settings" SettingsPropertyName="PROConnectionString2" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tbl_automatedreports_test" Member="tbl_automatedreports_tests">
+    <Type Name="tbl_automatedreports_test">
+      <Column Name="schedule_id_PK" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="schedule_storedprocedure" Type="System.String" DbType="VarChar(80) NOT NULL" CanBeNull="false" />
+      <Column Name="schedule_reportname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="schedule_schedulename" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="schedule_reporttype" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="schedule_createddate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="schedule_filters" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="schedule_chosendropdown" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="schedule_chosenNodeIds" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="schedule_frequency" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="schedule_reportformat" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="schedule_emailaddresses" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="schedule_user_id_FK" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="schedule_Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_customportfolioreports" Member="tbl_customportfolioreports">
+    <Type Name="tbl_customportfolioreport">
+      <Column Name="Customportfolio_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="schedule_id_PK" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Customportfolio_Report" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Customportfolio_Link" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Customportfolio_Run" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_Reportstatus" Member="tbl_Reportstatus">
+    <Type Name="tbl_Reportstatus">
+      <Column Name="Reportstatus_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="schedule_id_PK" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Reportstatus_Status" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Reportstatus_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_Portfoilolink" Member="tbl_Portfoilolinks">
+    <Type Name="tbl_Portfoilolink">
+      <Column Name="Protfolio_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Protfolio_report_id" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Protfolio_Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="tbl_Portfoilolink_tbl_PortfolioReport" Member="tbl_PortfolioReports" ThisKey="Protfolio_ID" OtherKey="Protfolio_ID" Type="tbl_PortfolioReport" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_PortfolioReport" Member="tbl_PortfolioReports">
+    <Type Name="tbl_PortfolioReport">
+      <Column Name="PortfolioReport_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PortfolioReport_ReportName" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="PortfolioReport_Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Protfolio_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="schedule_id_PK" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PortfolioReport_Status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="tbl_Portfoilolink_tbl_PortfolioReport" Member="tbl_Portfoilolink" ThisKey="Protfolio_ID" OtherKey="Protfolio_ID" Type="tbl_Portfoilolink" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_reportfrequency" Member="tbl_reportfrequencies">
+    <Type Name="tbl_reportfrequency">
+      <Column Name="Frequency_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Frequency_Name" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Frequency_Time" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_reports" Member="tbl_reports">
+    <Type Name="tbl_report">
+      <Column Name="reports_id_PK" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="reports_storedprocedure" Type="System.String" DbType="VarChar(80) NOT NULL" CanBeNull="false" />
+      <Column Name="reports_columns" Type="System.String" DbType="VarChar(2000) NOT NULL" CanBeNull="false" />
+      <Column Name="reports_URL" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="reports_graphbindings" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="reports_totals" Type="System.String" DbType="VarChar(550)" CanBeNull="true" />
+      <Column Name="reports_columntotal" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_automatedreports" Member="tbl_automatedreports">
+    <Type Name="tbl_automatedreport">
+      <Column Name="schedule_id_PK" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="schedule_storedprocedure" Type="System.String" DbType="VarChar(80) NOT NULL" CanBeNull="false" />
+      <Column Name="schedule_reportname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="schedule_schedulename" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="schedule_reporttype" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="schedule_createddate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="schedule_filters" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="schedule_chosendropdown" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="schedule_chosenNodeIds" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="schedule_frequency" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="schedule_reportformat" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="schedule_emailaddresses" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="schedule_user_id_FK" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="schedule_Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Protfolio_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="schedule_Time" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="schedule_Graph" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_ReportTotals" Member="tbl_ReportTotals">
+    <Type Name="tbl_ReportTotal">
+      <Column Name="Report_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Report_Name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Report_Type" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Report_Totals" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Report_Performance" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Report_SubTotals" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Report_TableJoins" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_KPI" Member="tbl_KPIs">
+    <Type Name="tbl_KPI">
+      <Column Name="KPI_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="site_id_PK" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KPI_Answered_Rate_Day" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KPI_Abandoned_Rate_Day" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KPI_Response_Rate_Day" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KPI_Answered_Rate_Eve" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KPI_Abandoned_Rate_Eve" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KPI_Response_Rate_Eve" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KPI_Answered_Rate_WeekEnd" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KPI_Abandoned_Rate_WeekEnd" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KPI_Response_Rate_Weekend" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KPI_Total_Spend_Month" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="KPI_Spend_International" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KPI_Spend_Premiumrate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KPI_Spend_LocalRate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KPI_Spend_National" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KPI_Spend_Local" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KPI_Spend_Mobiles" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KPI_Spend_Pagers" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KPI_DQ" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_usersite" Member="tbl_usersites">
+    <Type Name="tbl_usersite">
+      <Column Name="usersite_id_PK" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="usersite_user_id_FK" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="usersite_site_id_FK" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="user_active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
